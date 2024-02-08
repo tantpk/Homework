@@ -1,63 +1,85 @@
 ﻿@model IEnumerable<Homework.Models.客戶聯絡人>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "客戶聯絡人清單";
 }
 
-<h2>Index</h2>
+<h2 class="text-center mt-2">客戶聯絡人清單</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.職稱)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.姓名)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.手機)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.電話)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.客戶資料.客戶名稱)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.職稱)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.姓名)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.手機)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.電話)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.客戶資料.客戶名稱)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<div class="container mb-2" style="display: flex; justify-content: space-between;">
+    <div class="col-md-6">
+        <a href="@Url.Action("Create","ClientContacts")" class="btn btn-success">Create</a>
+    </div>
+    <div class="col-md-3">
+        @Html.DropDownList("ClientTitle", null, "Please select Client Title for filter", htmlAttributes: new { @class = "form-control selectpickers" })
+    </div>
+</div>
+<table class="table" id="clientContactTable">
+    <thead>
+        <tr class="table-active">
+            <th>
+                @Html.DisplayNameFor(model => model.職稱)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.姓名)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.手機)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.電話)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.客戶資料.客戶名稱)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.職稱)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.姓名)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.手機)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.電話)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.客戶資料.客戶名稱)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+    </tbody>
 
 </table>
+<script>
+    $(document).ready(function () {
+        $("#ClientTitle").change(function () {
+            var selectedValue = $(this).val();
+            var url = '@Url.Action("Index", "ClientContacts", new { clientTitle = "__VALUE__" })';
+            url = url.replace("__VALUE__", selectedValue);
+            console.log(url);
+            window.location.href = url;
+        });
+        $('#clientContactTable').DataTable({
+            responsive: true
+        });
+    });
+</script>

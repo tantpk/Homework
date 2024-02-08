@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
+using System.Web.UI.WebControls;
 
 namespace Homework
 {
@@ -9,7 +10,9 @@ namespace Homework
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/DataTables/jquery.dataTables.min.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -24,7 +27,10 @@ namespace Homework
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/DataTables/css/dataTables.jqueryui.min.css",
+                      "~/Content/DataTables/css/dataTables.bootstrap.min.css",
+                      "~/Content/DataTables/css/dataTables.bootstrap4.css"
+                      ));
         }
     }
 }

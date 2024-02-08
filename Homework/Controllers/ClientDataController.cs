@@ -26,6 +26,7 @@ namespace Homework.Controllers
             repoBankData = RepositoryHelper.Get客戶銀行資訊Repository(repo.UnitOfWork);
         }
         // GET: ClientData
+        [Route("{controller}/{action}/{clientType}")]
         public ActionResult Index(string clientType)
         {
             ViewBag.ClientType = new SelectList(repo.All().Select(a=>a.客戶分類).Distinct());

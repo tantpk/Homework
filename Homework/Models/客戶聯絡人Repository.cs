@@ -14,13 +14,17 @@ namespace Homework.Models
         {
             entity.是否已刪除 = true;
         }
-        public bool IsEmailDuplicated(string emailAddress)
+        public bool IsEmailDuplicated(string emailAddress, int id)
         {
-            return All().FirstOrDefault(a => a.Email == emailAddress) != null;
+            return All().FirstOrDefault(a => a.Email == emailAddress && a.客戶Id == id) != null;
         }
         public 客戶聯絡人 Find(int id)
         {
             return All().FirstOrDefault(a => a.Id == id);
+        }
+        public IQueryable<客戶聯絡人> FilterByClientTitle(string clientTitle)
+        {
+            return All().Where(a => a.職稱 == clientTitle);
         }
     }
 

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ClientDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ClientDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -55,6 +55,16 @@
           <Property Name="帳戶號碼" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="是否已刪除" Type="bit" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\LENOVO'S USER\DOCUMENTS\HOMEWORK\DB\客戶資料.MDF.dbo.ClientView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ClientView">
+          <Key>
+            <PropertyRef Name="客戶名稱" />
+          </Key>
+          <Property Name="客戶名稱" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="聯絡人數量" Type="int" />
+          <Property Name="銀行帳戶數量" Type="int" />
+        </EntityType>
         <Association Name="FK_客戶聯絡人_客戶資料">
           <End Role="客戶資料" Type="Self.客戶資料" Multiplicity="1" />
           <End Role="客戶聯絡人" Type="Self.客戶聯絡人" Multiplicity="*" />
@@ -84,6 +94,13 @@
           <EntitySet Name="客戶聯絡人" EntityType="Self.客戶聯絡人" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="客戶資料" EntityType="Self.客戶資料" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="客戶銀行資訊" EntityType="Self.客戶銀行資訊" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientView" EntityType="Self.ClientView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ClientView].[客戶名稱] AS [客戶名稱], 
+    [ClientView].[聯絡人數量] AS [聯絡人數量], 
+    [ClientView].[銀行帳戶數量] AS [銀行帳戶數量]
+    FROM [dbo].[ClientView] AS [ClientView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_客戶聯絡人_客戶資料" Association="Self.FK_客戶聯絡人_客戶資料">
             <End Role="客戶資料" EntitySet="客戶資料" />
             <End Role="客戶聯絡人" EntitySet="客戶聯絡人" />
@@ -93,8 +110,7 @@
             <End Role="客戶銀行資訊" EntitySet="客戶銀行資訊" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClientDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -189,7 +205,16 @@
             <End Role="客戶資料" EntitySet="客戶資料" />
             <End Role="客戶銀行資訊" EntitySet="客戶銀行資訊" />
           </AssociationSet>
+          <EntitySet Name="ClientViews" EntityType="ClientDataModel.ClientView" />
         </EntityContainer>
+        <EntityType Name="ClientView">
+          <Key>
+            <PropertyRef Name="客戶名稱" />
+          </Key>
+          <Property Name="客戶名稱" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="聯絡人數量" Type="Int32" />
+          <Property Name="銀行帳戶數量" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -247,6 +272,15 @@
                 <ScalarProperty Name="帳戶名稱" ColumnName="帳戶名稱" />
                 <ScalarProperty Name="帳戶號碼" ColumnName="帳戶號碼" />
                 <ScalarProperty Name="是否已刪除" ColumnName="是否已刪除" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientViews">
+            <EntityTypeMapping TypeName="ClientDataModel.ClientView">
+              <MappingFragment StoreEntitySet="ClientView">
+                <ScalarProperty Name="銀行帳戶數量" ColumnName="銀行帳戶數量" />
+                <ScalarProperty Name="聯絡人數量" ColumnName="聯絡人數量" />
+                <ScalarProperty Name="客戶名稱" ColumnName="客戶名稱" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
