@@ -17,6 +17,8 @@ namespace Homework.Controllers
         客戶資料Repository repo;
         客戶聯絡人Repository repoContact;
         客戶銀行資訊Repository repoBankData;
+        ClientViewRepository repoView;
+
 
         // GET: 客戶資料
         public ClientDataController()
@@ -24,6 +26,7 @@ namespace Homework.Controllers
             repo = RepositoryHelper.Get客戶資料Repository();
             repoContact = RepositoryHelper.Get客戶聯絡人Repository(repo.UnitOfWork);
             repoBankData = RepositoryHelper.Get客戶銀行資訊Repository(repo.UnitOfWork);
+            repoView = RepositoryHelper.GetClientViewRepository(repo.UnitOfWork);
         }
         // GET: ClientData
         [Route("{controller}/{action}/{clientType}")]
@@ -36,6 +39,11 @@ namespace Homework.Controllers
                 return View(repo.FilterByClientType(clientType).ToList());
             }
             return View(repo.All().ToList());
+        }
+        // GET: ClientView
+        public ActionResult ClientView()
+        {            
+            return View(repoView.All().ToList());
         }
 
         // GET: ClientData/Details/5

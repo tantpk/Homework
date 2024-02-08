@@ -21,7 +21,7 @@ namespace Homework.Models
         }
         public IQueryable<客戶資料> FilterByClientType(string clientType)
         {
-            return All().Where(a => a.客戶分類 == clientType);
+            return All().Where(a => clientType == string.Empty ? true : a.客戶分類 == clientType);
         }
     }
 

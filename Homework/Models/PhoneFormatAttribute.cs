@@ -13,6 +13,10 @@ namespace Homework.Models
         public override bool IsValid(object value)
         {
             var regex = @"\d{4}-\d{6}";
+            if(value == null)
+            {
+                return false;
+            }
             var match = Regex.Match(value.ToString(), regex, RegexOptions.IgnoreCase);
             
             if (!match.Success)

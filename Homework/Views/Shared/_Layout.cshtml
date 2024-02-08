@@ -29,11 +29,13 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     @*<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
+        <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
                     <li>@Html.ActionLink("客戶資料管理", "Index", "ClientData", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("客戶聯絡人管理", "Index", "ClientContacts", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("客戶銀行帳戶管理", "Index", "ClientBankData", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("客戶資料統計", "ClientView", "ClientData", new { area = "" }, new { @class = "nav-link" })</li>
+
                 </ul>
             </div>
         </div>

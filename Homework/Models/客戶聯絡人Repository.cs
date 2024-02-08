@@ -24,7 +24,7 @@ namespace Homework.Models
         }
         public IQueryable<客戶聯絡人> FilterByClientTitle(string clientTitle)
         {
-            return All().Where(a => a.職稱 == clientTitle);
+            return All().Where(a => clientTitle == string.Empty ? true : a.職稱 == clientTitle);
         }
     }
 
