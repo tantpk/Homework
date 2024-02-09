@@ -65,10 +65,47 @@
         }
     </tbody>
 </table>
+<div>
+    <a class="btn btn-success" onclick="downloadExcel()" id="exportButton">Export to Excel</a>
+</div>
 <script>
     $(document).ready(function () {
         $('#clientBankDataTable').DataTable({
             responsive: true
         });
     });
+    function downloadExcel() {
+        var table = $('#clientBankDataTable').DataTable();
+        var tableData = table.data().toArray();
+
+        // Get the column headers
+        var columnHeaders = table.columns().header().toArray().map(function (header) {
+            return $(header).text();
+        });
+
+        // Add the column headers as the first row in the tableData array
+        tableData.unshift(columnHeaders);
+
+        // Remove the last column from each row
+        tableData.forEach(function (row) {
+            row.pop();
+        });
+
+        $.ajax({
+            url: '@Url.Action("ExportToExcel", "Export")',
+            type: 'POST',
+            data: JSON.stringify({ data: tableData }),
+            contentType: 'application/json',
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (result) {
+                var blob = new Blob([result], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'ClientBankData '+'@DateTime.UtcNow.ToShortDateString()'+'.xlsx';
+                link.click();
+            }
+        });
+    }
 </script>

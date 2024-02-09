@@ -48,7 +48,7 @@
                 @Html.DisplayFor(modelItem => item.姓名)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayTextFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.手機)
@@ -69,6 +69,9 @@
     </tbody>
 
 </table>
+<div>
+    <a class="btn btn-success" onclick="downloadExcel()" id="exportButton">Export to Excel</a>
+</div>
 <script>
     $(document).ready(function () {
         $("#ClientTitle").change(function () {
@@ -82,4 +85,38 @@
             responsive: true
         });
     });
+    function downloadExcel() {
+        var table = $('#clientContactTable').DataTable();
+        var tableData = table.data().toArray();
+
+        // Get the column headers
+        var columnHeaders = table.columns().header().toArray().map(function (header) {
+            return $(header).text();
+        });
+
+        // Add the column headers as the first row in the tableData array
+        tableData.unshift(columnHeaders);
+
+        // Remove the last column from each row
+        tableData.forEach(function (row) {
+            row.pop();
+        });
+
+        $.ajax({
+            url: '@Url.Action("ExportToExcel", "Export")',
+            type: 'POST',
+            data: JSON.stringify({ data: tableData }),
+            contentType: 'application/json',
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (result) {
+                var blob = new Blob([result], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'ClientContact '+'@DateTime.UtcNow.ToShortDateString()'+'.xlsx';
+                link.click();
+            }
+        });
+    }
 </script>

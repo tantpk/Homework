@@ -11,7 +11,8 @@ namespace Homework
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/DataTables/jquery.dataTables.min.js"
+                        "~/Scripts/DataTables/jquery.dataTables.min.js",
+                        "~/Scripts/DataTables/jquery.unobtrusive-ajax.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
