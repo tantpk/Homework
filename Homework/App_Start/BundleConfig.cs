@@ -12,7 +12,8 @@ namespace Homework
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/DataTables/jquery.dataTables.min.js",
-                        "~/Scripts/DataTables/jquery.unobtrusive-ajax.js"
+                        "~/Scripts/DataTables/jquery.unobtrusive-ajax.js",
+                        "~/Scripts/DataTables/dataTables.responsive.min.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -30,7 +31,8 @@ namespace Homework
                       "~/Content/bootstrap.css",
                       "~/Content/DataTables/css/dataTables.jqueryui.min.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.min.css",
-                      "~/Content/DataTables/css/dataTables.bootstrap4.css"
+                      "~/Content/DataTables/css/dataTables.bootstrap4.css",
+                      "~/Content/DataTables/css/responsive.dataTables.min.css"
                       ));
         }
     }
