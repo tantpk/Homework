@@ -4,18 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    <script src="~/Scripts/jquery-3.7.1.js"></script>
-    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
-    <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <link rel="stylesheet" href="~/Content/bootstrap.css">
     <link rel="stylesheet" href="~/Content/DataTables/css/dataTables.jqueryui.min.css">
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/DataTables/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap4.css">
-
-
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    @*<script src="~/Scripts/bootstrap.min.js"></script>*@
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
 
     @Styles.Render("~/Content/css")
@@ -49,6 +48,14 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap-select")
     @RenderSection("scripts", required: false)
 </body>
 </html>
+<link rel="stylesheet" href="~/Content/bootstrap-select.min.css">
+<script src="~/Scripts/bootstrap-select.min.js"></script>
+<script src="~/Scripts/i18n/defaults-en_US.min.js"></script>
+
+
+
+
