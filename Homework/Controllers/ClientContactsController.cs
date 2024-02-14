@@ -86,7 +86,7 @@ namespace Homework.Controllers
 
         // GET: ClientContacts/Edit/5
         public ActionResult Edit(int? id)
-        {
+        {            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -95,7 +95,7 @@ namespace Homework.Controllers
             if (客戶聯絡人 == null)
             {
                 return HttpNotFound();
-            }
+            }            
             ViewBag.客戶Id = new SelectList(repo.All(), "Id", "客戶名稱", 客戶聯絡人.客戶Id);
             return View(客戶聯絡人);
         }
@@ -109,6 +109,12 @@ namespace Homework.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (repoContact.IsEmailDuplicated(客戶聯絡人.Email, 客戶聯絡人.客戶Id))
+                {
+                    ModelState.AddModelError("Email", "The email is already exist in our system");
+                    ViewBag.客戶Id = new SelectList(repo.All(), "Id", "客戶名稱", 客戶聯絡人.客戶Id);
+                    return View(客戶聯絡人);
+                }
                 var clientContact = repoContact.Find(客戶聯絡人.Id);
                 clientContact.InjectFrom(客戶聯絡人);
                 repoContact.UnitOfWork.Commit();
