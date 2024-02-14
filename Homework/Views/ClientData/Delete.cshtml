@@ -10,60 +10,60 @@
 <div>
     <h4>客戶資料</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
+    <dl class="dl-horizontal card">
+        <dt class="card-body">
             @Html.DisplayNameFor(model => model.客戶名稱)
         </dt>
 
-        <dd>
+        <dd class="card-body">
             @Html.DisplayFor(model => model.客戶名稱)
         </dd>
 
-        <dt>
+        <dt class="card-body">
             @Html.DisplayNameFor(model => model.統一編號)
         </dt>
 
-        <dd>
+        <dd class="card-body">
             @Html.DisplayFor(model => model.統一編號)
         </dd>
 
-        <dt>
+        <dt class="card-body">
             @Html.DisplayNameFor(model => model.電話)
         </dt>
 
-        <dd>
+        <dd class="card-body">
             @Html.DisplayFor(model => model.電話)
         </dd>
 
-        <dt>
+        <dt class="card-body">
             @Html.DisplayNameFor(model => model.傳真)
         </dt>
 
-        <dd>
+        <dd class="card-body"> 
             @Html.DisplayFor(model => model.傳真)
         </dd>
 
-        <dt>
+        <dt class="card-body">
             @Html.DisplayNameFor(model => model.地址)
         </dt>
 
-        <dd>
+        <dd class="card-body">
             @Html.DisplayFor(model => model.地址)
         </dd>
 
-        <dt>
+        <dt class="card-body">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
 
-        <dd>
+        <dd class="card-body">
             @Html.DisplayFor(model => model.Email)
         </dd>
 
-        <dt>
+        <dt class="card-body">
             @Html.DisplayNameFor(model => model.客戶分類)
         </dt>
 
-        <dd>
+        <dd class="card-body">
             @Html.DisplayFor(model => model.客戶分類)
         </dd>
     </dl>
@@ -72,7 +72,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }
