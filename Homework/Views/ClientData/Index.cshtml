@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "客戶資料清單";
+    var clientType = (string)ViewData["selectedClientType"];
 }
 <h2 class="text-center mt-2">客戶資料清單</h2>
 <div class="container mb-2" style="display: flex; justify-content: space-between;">
@@ -74,7 +75,7 @@
     </tbody>
 </table>
 <div>
-    <a class="btn btn-success" onclick="downloadExcel()" id="exportButton">Export to Excel</a>
+    <a class="btn btn-success" href="@Url.Action("ExportClientDataToExcel", "Export", new { clientType = clientType })" @*onclick="downloadExcel()"*@ id="exportButton">Export to Excel</a>
 </div>
 <script>
     $(document).ready(function () {
@@ -90,7 +91,7 @@
             responsive: true
         });
     });
-    function downloadExcel() {
+    @*function downloadExcel() {
         var table = $('#clientDataTable').DataTable();
         var tableData = table.data().toArray();
 
@@ -123,5 +124,5 @@
                 link.click();
             }
         });
-    }
+    }*@
 </script>

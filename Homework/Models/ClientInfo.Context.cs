@@ -30,5 +30,6 @@ namespace Homework.Models
         public virtual DbSet<客戶資料> 客戶資料 { get; set; }
         public virtual DbSet<客戶銀行資訊> 客戶銀行資訊 { get; set; }
         public virtual DbSet<ClientView> ClientViews { get; set; }
+        public virtual DbSet<ClientType> ClientTypes { get; set; }
     }
 }

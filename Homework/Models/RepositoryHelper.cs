@@ -9,6 +9,21 @@ namespace Homework.Models
 		}
 		
 
+		public static ClientTypeRepository GetClientTypeRepository()
+		{
+			var repository = new ClientTypeRepository();
+			repository.UnitOfWork = GetUnitOfWork();
+			return repository;
+		}
+
+		public static ClientTypeRepository GetClientTypeRepository(IUnitOfWork unitOfWork)
+		{
+			var repository = new ClientTypeRepository();
+			repository.UnitOfWork = unitOfWork;
+			return repository;
+		}
+
+
 		public static ClientViewRepository GetClientViewRepository()
 		{
 			var repository = new ClientViewRepository();

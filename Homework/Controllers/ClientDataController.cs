@@ -18,6 +18,8 @@ namespace Homework.Controllers
         客戶聯絡人Repository repoContact;
         客戶銀行資訊Repository repoBankData;
         ClientViewRepository repoView;
+        ClientTypeRepository repoClientType;
+
 
 
         // GET: 客戶資料
@@ -27,15 +29,19 @@ namespace Homework.Controllers
             repoContact = RepositoryHelper.Get客戶聯絡人Repository(repo.UnitOfWork);
             repoBankData = RepositoryHelper.Get客戶銀行資訊Repository(repo.UnitOfWork);
             repoView = RepositoryHelper.GetClientViewRepository(repo.UnitOfWork);
+            repoClientType = RepositoryHelper.GetClientTypeRepository(repo.UnitOfWork);
         }
         // GET: ClientData
         [Route("{controller}/{action}/{clientType}")]
         public ActionResult Index(string clientType)
         {
-            ViewBag.ClientType = new SelectList(repo.All().Select(a=>a.客戶分類).Distinct());
+            //ViewBag.ClientType = new SelectList(repo.All().Select(a=>a.客戶分類).Distinct());
+            ViewBag.ClientType = new SelectList(repoClientType.All(), "Name", "Name");
+            ViewData["selectedClientType"] = string.Empty;
 
             if (clientType != null)
             {
+                ViewData["selectedClientType"] = clientType;
                 return View(repo.FilterByClientType(clientType).ToList());
             }
             return View(repo.All().ToList());
@@ -64,6 +70,8 @@ namespace Homework.Controllers
         // GET: ClientData/Create
         public ActionResult Create()
         {
+            ViewBag.客戶分類 = new SelectList(repoClientType.All(), "Name", "Name");
+
             return View();
         }
 
@@ -97,6 +105,8 @@ namespace Homework.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.客戶分類 = new SelectList(repoClientType.All(), "Name", "Name", 客戶資料.客戶分類);
+
             return View(客戶資料);
         }
 

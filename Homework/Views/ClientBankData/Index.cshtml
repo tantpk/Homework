@@ -66,7 +66,7 @@
     </tbody>
 </table>
 <div>
-    <a class="btn btn-success" onclick="downloadExcel()" id="exportButton">Export to Excel</a>
+    <a class="btn btn-success" href="@Url.Action("ExportBankDataToExcel", "Export")" id="exportButton">Export to Excel</a>
 </div>
 <script>
     $(document).ready(function () {
@@ -74,7 +74,7 @@
             responsive: true
         });
     });
-    function downloadExcel() {
+    @*function downloadExcel() {
         var table = $('#clientBankDataTable').DataTable();
         var tableData = table.data().toArray();
 
@@ -107,5 +107,5 @@
                 link.click();
             }
         });
-    }
+    }*@
 </script>

@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "客戶聯絡人清單";
+    var clientTitle = (string)ViewData["selectedClientTitle"];
 }
 
 <h2 class="text-center mt-2">客戶聯絡人清單</h2>
@@ -70,7 +71,7 @@
 
 </table>
 <div>
-    <a class="btn btn-success" onclick="downloadExcel()" id="exportButton">Export to Excel</a>
+    <a class="btn btn-success" href="@Url.Action("ExportClientContactsToExcel", "Export", new { clientTitle = clientTitle })" id="exportButton">Export to Excel</a>
 </div>
 <script>
     $(document).ready(function () {
@@ -85,7 +86,7 @@
             responsive: true
         });
     });
-    function downloadExcel() {
+    @*function downloadExcel() {
         var table = $('#clientContactTable').DataTable();
         var tableData = table.data().toArray();
 
@@ -118,5 +119,5 @@
                 link.click();
             }
         });
-    }
+    }*@
 </script>

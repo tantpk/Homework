@@ -30,8 +30,10 @@ namespace Homework.Controllers
         {            
             ViewBag.ClientTitle = new SelectList(repoContact.All().Select(a => a.職稱).Distinct());
             var 客戶聯絡人 = repoContact.All().Include(客 => 客.客戶資料);
+            ViewData["selectedClientTitle"] = string.Empty;
             if (clientTitle != null)
             {
+                ViewData["selectedClientTitle"] = clientTitle;
                 return View(repoContact.FilterByClientTitle(clientTitle).ToList());
             }
             return View(客戶聯絡人.ToList());
@@ -69,11 +71,11 @@ namespace Homework.Controllers
             ViewBag.客戶Id = new SelectList(repo.All(), "Id", "客戶名稱");
             if (ModelState.IsValid)
             {
-                if (repoContact.IsEmailDuplicated(客戶聯絡人.Email, 客戶聯絡人.客戶Id))
-                {
-                    ModelState.AddModelError("Email", "The email is already exist in our system");
-                    return View(客戶聯絡人);
-                }
+                //if (repoContact.IsEmailDuplicated(客戶聯絡人.Email, 客戶聯絡人.客戶Id))
+                //{
+                //    ModelState.AddModelError("Email", "The email is already exist in our system");
+                //    return View(客戶聯絡人);
+                //}
                 客戶聯絡人.是否已刪除 = false;
                 repoContact.Add(客戶聯絡人);
                 repoContact.UnitOfWork.Commit();
@@ -109,12 +111,12 @@ namespace Homework.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (repoContact.IsEmailDuplicated(客戶聯絡人.Email, 客戶聯絡人.客戶Id))
-                {
-                    ModelState.AddModelError("Email", "The email is already exist in our system");
-                    ViewBag.客戶Id = new SelectList(repo.All(), "Id", "客戶名稱", 客戶聯絡人.客戶Id);
-                    return View(客戶聯絡人);
-                }
+                //if (repoContact.IsEmailDuplicated(客戶聯絡人.Email, 客戶聯絡人.客戶Id))
+                //{
+                //    ModelState.AddModelError("Email", "The email is already exist in our system");
+                //    ViewBag.客戶Id = new SelectList(repo.All(), "Id", "客戶名稱", 客戶聯絡人.客戶Id);
+                //    return View(客戶聯絡人);
+                //}
                 var clientContact = repoContact.Find(客戶聯絡人.Id);
                 clientContact.InjectFrom(客戶聯絡人);
                 repoContact.UnitOfWork.Commit();
