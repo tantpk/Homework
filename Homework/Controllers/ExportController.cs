@@ -112,17 +112,17 @@ namespace Homework.Controllers
 
                 var worksheet = workbook.Worksheets.Add("ClientData");
                 // Write DataTable headers to the worksheet
-                DataTable clientDataTable = ToDataTable(clientData);
-                for (int i = 0; i < clientDataTable.Columns.Count; i++)
+                DataTable clientBankDataTable = ToDataTable(clientData);
+                for (int i = 0; i < clientBankDataTable.Columns.Count; i++)
                 {
-                    worksheet.Cell(1, i + 1).Value = clientDataTable.Columns[i].ColumnName.Trim();
+                    worksheet.Cell(1, i + 1).Value = clientBankDataTable.Columns[i].ColumnName.Trim();
                 }
                 // Write DataTable data to the worksheet
-                for (int i = 0; i < clientDataTable.Rows.Count; i++)
+                for (int i = 0; i < clientBankDataTable.Rows.Count; i++)
                 {
-                    for (int j = 0; j < clientDataTable.Columns.Count; j++)
+                    for (int j = 0; j < clientBankDataTable.Columns.Count; j++)
                     {
-                        worksheet.Cell(i + 2, j + 1).Value = clientDataTable.Rows[i][j].ToString().Trim();
+                        worksheet.Cell(i + 2, j + 1).Value = clientBankDataTable.Rows[i][j].ToString().Trim();
                     }
                 }
                 var firstRow = worksheet.Row(1);

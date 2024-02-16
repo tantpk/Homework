@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using DocumentFormat.OpenXml.Office.Word;
 
 namespace Homework.Models
 {
@@ -14,9 +15,16 @@ namespace Homework.Models
         {
             entity.是否已刪除 = true;
         }
-        public bool IsEmailDuplicated(string emailAddress, int id)
+        public bool IsEmailDuplicated(string emailAddress, int id, int recordId)
         {
-            return All().FirstOrDefault(a => a.Email == emailAddress && a.客戶Id == id) != null;
+            if(recordId == 0)
+            {
+                return All().FirstOrDefault(a => a.Email == emailAddress && a.客戶Id == id) != null;
+            }
+            else
+            {
+                return All().FirstOrDefault(a => a.Email == emailAddress && a.客戶Id == id && a.Id != recordId) != null;
+            }
         }
         public 客戶聯絡人 Find(int id)
         {

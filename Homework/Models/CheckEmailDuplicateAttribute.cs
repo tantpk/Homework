@@ -19,7 +19,7 @@ namespace Homework.Models
             if (value != null)
             {
                 // Perform the duplicate email check
-                if (repoContact.IsEmailDuplicated(value.ToString(), Convert.ToInt32(validationContext.ObjectType.GetProperty("客戶Id").GetValue(validationContext.ObjectInstance)) ))
+                if (repoContact.IsEmailDuplicated(value.ToString(), Convert.ToInt32(validationContext.ObjectType.GetProperty("客戶Id").GetValue(validationContext.ObjectInstance)), Convert.ToInt32(validationContext.ObjectType.GetProperty("Id").GetValue(validationContext.ObjectInstance))))
                 {
                     return new ValidationResult(ErrorMessage);
                 }

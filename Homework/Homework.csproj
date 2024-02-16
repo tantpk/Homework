@@ -821,6 +821,13 @@
     <Content Include="Views\ClientBankData\Edit.cshtml" />
     <Content Include="Views\ClientBankData\Index.cshtml" />
     <Content Include="Views\ClientData\ClientView.cshtml" />
+    <Content Include="Scripts\Web.config" />
+    <None Include="Scripts\Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Scripts\Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
